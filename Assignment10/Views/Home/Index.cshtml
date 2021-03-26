@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IndexViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Bowlers @(Model.TeamName == null ? "" : " of The " + Model.TeamName)</h1>
+
+    <style>
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            @*min-width: 400px;*@
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+            .styled-table tbody tr:last-of-type {
+                border-bottom: 2px solid #24a0ed;
+            }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+            .styled-table thead tr {
+                background-color: #24a0ed;
+                color: #ffffff;
+                text-align: left;
+            }
+    </style>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Middle Init</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Bowler b in Model.Bowlers)
+            {
+            <tr>
+                <td>@b.BowlerFirstName</td>
+                @if (b.BowlerMiddleInit != null)
+                {
+                    <td>@b.BowlerMiddleInit</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+                <td>@b.BowlerLastName</td>
+                <td>@b.BowlerAddress</td>
+                <td>@b.BowlerCity</td>
+                <td>@b.BowlerState</td>
+                <td>@b.BowlerZip</td>
+                <td>@b.BowlerPhoneNumber</td>
+            </tr> 
+            }
+        </tbody>
+    </table>
+
+    
+
+</div>
+<div page-info="@Model.PageNumberingInfo"
+     page-action="Index"
+     page-classes-enabled="true"
+     page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary"
+     team-name="@Model.TeamName"
+     page-url-teamname="@Model.TeamName"
+     class="btn-group pull-right m-1">
+
+</div>
